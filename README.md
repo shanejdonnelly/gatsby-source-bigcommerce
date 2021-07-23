@@ -1,12 +1,12 @@
 # gatsby-source-bigcommerce-v2
 
-This source plugin makes BigCommerce API data available in GatsbyJS sites
+This source plugin makes BigCommerce API data available in GatsbyJS sites. Currently in active development.
 
 ## Installation
 
 ```
 # Install the plugin
-yarn add gatsby-source-bigcommerce
+yarn add gatsby-source-bigcommerce-v2
 ```
 
 in `gatsby-config.js`
@@ -15,7 +15,7 @@ in `gatsby-config.js`
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-source-bigcommerce',
+      resolve: 'gatsby-source-bigcommerce-v2',
       options: {
         ...
       }
@@ -92,7 +92,3 @@ options: {
 Once your instance is deployed in Gatsby Cloud, get your preview URL and add it as an environment variable under the key `SITE_HOSTNAME`.
 
 Restart your instance and preview should be live.
-
-#### Credit
-
-thanks to all the contributors to [node-bigcommerce](https://github.com/getconversio/node-bigcommerce)
