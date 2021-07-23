@@ -42,23 +42,7 @@
   "devDependencies": {
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
-    "@release-it/conventional-changelog": "^3.0.1",
     "cross-env": "^7.0.3",
-    "dotenv-cli": "^4.0.0",
-    "release-it": "^14.10.0"
-  },
-  "release-it": {
-    "npm": {
-      "publish": true,
-      "publishPath": ".",
-      "skipChecks": true
-    },
-    "git": {
-      "changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}"
-    },
-    "github": {
-      "release": true,
-      "skipChecks": true
-    }
+    "dotenv-cli": "^4.0.0"
   }
 }
