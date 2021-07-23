@@ -50,7 +50,7 @@
   "release-it": {
     "npm": {
       "publish": true,
-      "publishPath": "./dist",
+      "publishPath": ".",
       "skipChecks": true
     },
     "git": {
