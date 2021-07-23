@@ -55,31 +55,31 @@ exports.sourceNodes = async (
 
   endpoint
     ? // Fetch and create nodes for a single endpoint.
-      await bigCommerce.get(endpoint).then(res => {
-        // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
-        const resData = res.data ? res.data : res;
-        return resData.map(datum =>
-          createNode(handleGenerateNodes(datum, nodeName))
-        );
-      })
-    : // Fetch and create nodes from multiple endpoints
-      await Promise.all(
-        Object.entries(endpoints).map(([nodeName, endpoint]) =>
-          bigCommerce.get(endpoint).then(res => {
-            // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
-            const resData = res.data ? res.data : res;
-            return resData.map(datum =>
-              createNode(handleGenerateNodes(datum, nodeName))
-            );
-          })
-        )
+    await bigCommerce.get(endpoint).then(res => {
+      // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
+      const resData = res.data ? res.data : res;
+      return resData.map(datum =>
+        createNode(handleGenerateNodes(datum, nodeName))
       );
+    })
+    : // Fetch and create nodes from multiple endpoints
+    await Promise.all(
+      Object.entries(endpoints).map(([nodeName, endpoint]) =>
+        bigCommerce.get(endpoint).then(res => {
+          // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
+          const resData = res.data ? res.data : res;
+          return resData.map(datum =>
+            createNode(handleGenerateNodes(datum, nodeName))
+          );
+        })
+      )
+    );
 
   if (process.env.NODE_ENV === "development" && preview) {
     // make a fetch request to subscribe to webhook from BC.
     await fetch(
       `https://api.bigcommerce.com/stores/${storeHash}/${apiVersion ||
-        `v3`}/hooks`,
+      `v3`}/hooks`,
       {
         method: "POST",
         headers: {
