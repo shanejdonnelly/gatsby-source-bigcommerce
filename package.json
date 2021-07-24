@@ -1,11 +1,10 @@
 {
   "name": "gatsby-source-bigcommerce-v2",
   "version": "0.4.9",
-  "description": "Updated Gatsby plugin for BigCommerce API",
+  "description": "Unofficial Gatsby plugin for BigCommerce API",
   "scripts": {
     "build": "babel src --out-dir .",
-    "prepublishOnly": "npm run build",
-    "release": "dotenv release-it --"
+    "prepublishOnly": "npm run build"
   },
   "homepage": "https://github.com/guyromellemagayano/gatsby-source-bigcommerce-v2/blob/master/README.md",
   "repository": {
@@ -33,6 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-preset-gatsby-package": "^1.10.0",
+    "http-proxy-middleware": "^2.0.1",
     "micro": "^9.3.4",
     "node-fetch": "^2.6.1"
   },
