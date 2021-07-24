@@ -1,9 +1,9 @@
 "use strict";
 
-const BigCommerce = require("./bigcommerce");
-const micro = require(`micro`);
-const fetch = require("node-fetch");
 const { createProxyMiddleware } = require("http-proxy-middleware")
+const BigCommerce = require("./bigcommerce");
+const fetch = require("node-fetch");
+const micro = require(`micro`);
 
 exports.sourceNodes = async (
   { actions, createNodeId, createContentDigest },
