@@ -1,17 +1,16 @@
 # gatsby-source-bigcommerce-v2
 
-This source plugin makes BigCommerce API data available in GatsbyJS sites. Currently in active development.
+Currently in active development. This source plugin makes BigCommerce API data available in GatsbyJS sites.
 
 ## Installation
 
-```
-# Install the plugin
+```cmd
 yarn add gatsby-source-bigcommerce-v2
 ```
 
 in `gatsby-config.js`
 
-```
+```js
 module.exports = {
   plugins: [
     {
@@ -30,7 +29,7 @@ Follows [node-bigcommerce-v2](https://github.com/guyromellemagayano/node-bigcomm
 
 Example configuration for a single `endpoint`:
 
-```
+```json
 options: {
   // REQUIRED
   clientId: 'yourClientID',
@@ -48,7 +47,7 @@ options: {
 
 If you want to return data from multiple endpoints, use `endpoints` instead. You can find a list of endpoints [here](https://developer.bigcommerce.com/api-reference/).
 
-```
+```json
 options: {
   ...
 
@@ -62,18 +61,18 @@ options: {
 
 ## How to query
 
-```
+```graphql
 {
-  allBigCommerceNode {
-    edges{
-      node{
-        name
-        price
-        id
-        sku
-      }
-    }
-  }
+	allBigCommerceNode {
+		edges {
+			node {
+				name
+				price
+				id
+				sku
+			}
+		}
+	}
 }
 ```
 
@@ -83,9 +82,9 @@ This currently supports use in Gatsby Cloud.
 Preview **only supports product updates**
 add the `preview` key to options as shown
 
-```javascript
+```json
 options: {
-	preview: true;
+  preview: true;
 }
 ```
 
