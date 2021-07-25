@@ -1,7 +1,7 @@
 "use strict";
 
-const https = require("https"),
-    zlib = require("zlib");
+import { request } from "https";
+import { deflate, gunzip } from "zlib";
 
 /**
  * Parse response
@@ -78,7 +78,7 @@ class Request {
         console.log("Starting Big Commerce Request");
 
         return new Promise((resolve, reject) => {
-            const req = https.request(options, (res) => {
+            const req = request(options, (res) => {
                 const contentEncoding = res.headers["content-encoding"];
                 const shouldUnzip =
                     ["deflate", "gzip"].indexOf(contentEncoding) !== -1;
@@ -135,9 +135,7 @@ class Request {
                     // Use GZIP decompression if required
                     if (shouldUnzip) {
                         const unzip =
-                            contentEncoding === "deflate"
-                                ? zlib.deflate
-                                : zlib.gunzip;
+                            contentEncoding === "deflate" ? deflate : gunzip;
 
                         return unzip(
                             Buffer.from(body, encoding),
@@ -172,4 +170,4 @@ class Request {
     }
 }
 
-module.exports = Request;
+export default Request;
