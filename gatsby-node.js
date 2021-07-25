@@ -1,20 +1,33 @@
-"use strict";
+"use strict"; // External
 
-const BigCommerce = require("./bigcommerce");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-const micro = require(`micro`);
+exports.__esModule = true;
+exports.sourceNodes = sourceNodes;
+exports.onCreateDevServer = onCreateDevServer;
 
-const fetch = require("node-fetch");
+var _dotenv = _interopRequireDefault(require("dotenv"));
 
-const {
-  createProxyMiddleware
-} = require("http-proxy-middleware");
+var _httpProxyMiddleware = require("http-proxy-middleware");
 
-exports.sourceNodes = async ({
+var _nodeFetch = _interopRequireDefault(require("node-fetch"));
+
+var _micro = _interopRequireWildcard(require("micro"));
+
+var _bigcommerce = _interopRequireDefault(require("./bigcommerce"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// BigCommerce
+_dotenv.default.config();
+
+async function sourceNodes({
   actions,
   createNodeId,
   createContentDigest
-}, configOptions) => {
+}, configOptions) {
   const {
     createNode
   } = actions;
@@ -29,7 +42,7 @@ exports.sourceNodes = async ({
     nodeName,
     apiVersion
   } = configOptions;
-  const bigCommerce = new BigCommerce({
+  const bigCommerce = new _bigcommerce.default({
     clientId,
     accessToken,
     secret,
@@ -57,21 +70,25 @@ exports.sourceNodes = async ({
     };
   };
 
-  endpoint ? // Fetch and create nodes for a single endpoint.
-  await bigCommerce.get(endpoint).then(res => {
-    // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
-    const resData = res.data ? res.data : res;
-    return resData.map(datum => createNode(handleGenerateNodes(datum, nodeName)));
-  }) : // Fetch and create nodes from multiple endpoints
-  await Promise.all(Object.entries(endpoints).map(([nodeName, endpoint]) => bigCommerce.get(endpoint).then(res => {
-    // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
-    const resData = res.data ? res.data : res;
-    return resData.map(datum => createNode(handleGenerateNodes(datum, nodeName)));
-  })));
+  if (endpoint) {
+    // Fetch and create nodes for a single endpoint.
+    return await bigCommerce.get(endpoint).then(res => {
+      // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
+      const resData = res.data ? res.data : res;
+      return resData.map(datum => createNode(handleGenerateNodes(datum, nodeName)));
+    });
+  } else {
+    // Fetch and create nodes from multiple endpoints
+    await Promise.all(Object.entries(endpoints).map(([nodeName, endpoint]) => bigCommerce.get(endpoint).then(res => {
+      // If the data object is not on the response, it could be v2 which returns an array as the root, so use that as a fallback
+      const resData = res.data ? res.data : res;
+      return resData.map(datum => createNode(handleGenerateNodes(datum, nodeName)));
+    })));
+  }
 
   if (process.env.NODE_ENV === "development" && preview) {
     // make a fetch request to subscribe to webhook from BC.
-    await fetch(`https://api.bigcommerce.com/stores/${storeHash}/${apiVersion || `v3`}/hooks`, {
+    await (0, _nodeFetch.default)(`https://api.bigcommerce.com/stores/${storeHash}/${apiVersion || `v3`}/hooks`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -85,8 +102,8 @@ exports.sourceNodes = async ({
         destination: `${process.env.SITE_HOSTNAME}/___BCPreview`
       })
     }).then(res => res.json());
-    const server = micro(async (req, res) => {
-      const request = await micro.json(req);
+    const server = (0, _micro.default)(async (req, res) => {
+      const request = await (0, _micro.json)(req);
       const productId = request.data.id; // webhooks dont send any information, just an id
 
       const newProduct = await bigCommerce.get(`/catalog/products/${productId}`);
@@ -101,13 +118,13 @@ exports.sourceNodes = async ({
     });
     server.listen(8033, console.log("\x1b[32m", `listening to changes for live preview at route /___BCPreview`));
   }
-};
+}
 
-exports.onCreateDevServer = ({
+function onCreateDevServer({
   app
-}) => {
-  app.use("/___BCPreview/", createProxyMiddleware({
+}) {
+  app.use("/___BCPreview/", (0, _httpProxyMiddleware.createProxyMiddleware)({
     target: `http://localhost:8033`,
     secure: false
   }));
-};
+}

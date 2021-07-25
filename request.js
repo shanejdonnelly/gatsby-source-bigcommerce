@@ -1,15 +1,18 @@
-'use strict';
+"use strict";
 
-const https = require('https'),
-      zlib = require('zlib');
+exports.__esModule = true;
+exports.default = void 0;
+
+var _https = require("https");
+
+var _zlib = require("zlib");
+
 /**
  * Parse response
  */
-
-
 function parseResponse(res, body, resolve, reject) {
   try {
-    if (!/application\/json/.test(res.headers['content-type']) || body.trim() === '') {
+    if (!/application\/json/.test(res.headers["content-type"]) || body.trim() === "") {
       return resolve(body);
     }
 
@@ -33,7 +36,7 @@ class Request {
     failOnLimitReached = false,
     agent = null
   } = {}) {
-    if (!hostname) throw new Error('The hostname is required to make the call to the server.');
+    if (!hostname) throw new Error("The hostname is required to make the call to the server.");
     this.hostname = hostname;
     this.headers = headers;
     this.failOnLimitReached = failOnLimitReached;
@@ -49,28 +52,28 @@ class Request {
       method: method.toUpperCase(),
       port: 443,
       headers: Object.assign({
-        'User-Agent': 'gatsby-source-bigcommerce',
-        'Content-Type': 'application/json',
-        'Accept-Encoding': 'gzip, deflate'
+        "User-Agent": "gatsby-source-bigcommerce-v2",
+        "Content-Type": "application/json",
+        "Accept-Encoding": "gzip, deflate"
       }, this.headers)
     };
     if (this.agent) options.agent = this.agent;
 
     if (data) {
-      options.headers['Content-Length'] = Buffer.from(dataString).length;
+      options.headers["Content-Length"] = Buffer.from(dataString).length;
     }
 
-    console.log('Starting Big Commerce Request');
+    console.log("\n", "Starting BigCommerce Request");
     return new Promise((resolve, reject) => {
-      const req = https.request(options, res => {
-        const contentEncoding = res.headers['content-encoding'];
-        const shouldUnzip = ['deflate', 'gzip'].indexOf(contentEncoding) !== -1;
-        const encoding = shouldUnzip ? 'binary' : 'utf8';
-        let body = '';
+      const req = (0, _https.request)(options, res => {
+        const contentEncoding = res.headers["content-encoding"];
+        const shouldUnzip = ["deflate", "gzip"].indexOf(contentEncoding) !== -1;
+        const encoding = shouldUnzip ? "binary" : "utf8";
+        let body = "";
         res.setEncoding(encoding); // If the API limit has been reached
 
         if (res.statusCode === 429) {
-          const timeToWait = res.headers['x-retry-after'];
+          const timeToWait = res.headers["x-retry-after"];
 
           if (this.failOnLimitReached) {
             const err = new Error(`You have reached the rate limit for the BigCommerce API. Please retry in ${timeToWait} seconds.`);
@@ -80,14 +83,14 @@ class Request {
 
           console.log(`You have reached the rate limit for the BigCommerce API, we will retry again in ${timeToWait} seconds.`);
           return setTimeout(() => {
-            console.log('Restarting request call after suggested time');
+            console.log("Restarting request call after suggested time");
             this.run(method, path, data).then(resolve).catch(reject);
           }, timeToWait * 1000);
         }
 
-        res.on('data', chunk => body += chunk);
-        res.on('end', () => {
-          console.log('Request complete');
+        res.on("data", chunk => body += chunk);
+        res.on("end", () => {
+          console.log("Request complete");
 
           if (res.statusCode >= 400 && res.statusCode <= 600) {
             const error = new Error(`Request returned error code: ${res.statusCode} and body: ${body}`);
@@ -98,23 +101,23 @@ class Request {
 
 
           if (shouldUnzip) {
-            const unzip = contentEncoding === 'deflate' ? zlib.deflate : zlib.gunzip;
+            const unzip = contentEncoding === "deflate" ? _zlib.deflate : _zlib.gunzip;
             return unzip(Buffer.from(body, encoding), (err, data) => {
               if (err) {
                 return reject(err);
               }
 
-              return parseResponse(res, data.toString('utf8'), resolve, reject);
+              return parseResponse(res, data.toString("utf8"), resolve, reject);
             });
           }
 
           return parseResponse(res, body, resolve, reject);
         });
       });
-      req.on('error', e => reject(e));
+      req.on("error", e => reject(e));
 
       if (data) {
-        console.log('Sending Data: ' + dataString);
+        console.log("Sending Data: " + dataString);
         req.write(dataString);
       }
 
@@ -124,4 +127,5 @@ class Request {
 
 }
 
-module.exports = Request;
+var _default = Request;
+exports.default = _default;

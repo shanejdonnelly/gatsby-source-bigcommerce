@@ -75,7 +75,7 @@ class Request {
             options.headers["Content-Length"] = Buffer.from(dataString).length;
         }
 
-        console.log("Starting Big Commerce Request");
+        console.log("\n", "Starting BigCommerce Request");
 
         return new Promise((resolve, reject) => {
             const req = request(options, (res) => {
