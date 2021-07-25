@@ -1,22 +1,22 @@
 {
-    "name": "gatsby-source-bigcommerce-v2",
+    "name": "gatsby-bigcommerce-plugin",
     "version": "0.5.0",
-    "description": "Unofficial Gatsby plugin for BigCommerce API",
+    "description": "Official Gatsby plugin for BigCommerce API",
     "scripts": {
         "build": "babel src --out-dir .",
         "prepublishOnly": "npm run build",
         "test": "echo \"Error: no test specified\" && exit 1",
         "prepare": "husky install"
     },
-    "homepage": "https://github.com/guyromellemagayano/gatsby-source-bigcommerce-v2/blob/master/README.md",
+    "homepage": "https://github.com/epic-design-labs/gatsby-bigcommerce-plugin/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/guyromellemagayano/gatsby-source-bigcommerce-v2"
+        "url": "https://github.com/epic-design-labs/gatsby-bigcommerce-plugin"
     },
     "keywords": [
         "gatsby",
         "gatsby-plugin",
-        "gatsby-source-bigcommerce-v2",
+        "gatsby-bigcommerce-plugin",
         "plugin",
         "source",
         "big",
@@ -24,8 +24,12 @@
         "bigcommerce",
         "api"
     ],
-    "author": "Guy Romelle Magayano <aspiredtechie2010@gmail.com> (https://guyromellemagayano.dev)",
+    "author": "Epic Design Labs <guy@epicdesignlabs.com> (https://epicdesignlabs.com)",
     "contributors": [
+        {
+            "name": "Guy Romelle Magayano",
+            "email": "guy@epicdesignlabs.com"
+        },
         {
             "name": "Grant Glidewell",
             "email": "grant@thirdandgrove.com"
