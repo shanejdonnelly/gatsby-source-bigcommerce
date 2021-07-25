@@ -1,11 +1,19 @@
-# gatsby-bigcommerce-plugin
+# gatsby-source-bigcommerce
 
-Currently in active development. This source plugin makes BigCommerce API data available in GatsbyJS sites.
+This source plugin makes BigCommerce API data available in GatsbyJS sites. Currently in active development.
 
 ## Installation
 
+For Yarn:
+
 ```
-yarn add gatsby-bigcommerce-plugin
+yarn add gatsby-source-bigcommerce
+```
+
+For NPM:
+
+```
+npm install gatsby-source-bigcommerce
 ```
 
 in `gatsby-config.js`
@@ -14,7 +22,7 @@ in `gatsby-config.js`
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-bigcommerce-plugin',
+      resolve: 'gatsby-source-bigcommerce',
       options: {
         ...
       }
@@ -25,7 +33,7 @@ module.exports = {
 
 ## Configuration options
 
-Follows [node-bigcommerce-v2](https://github.com/epic-design-labs/node-bigcommerce-v2) api
+Follows [node-bigcommerce](https://github.com/epic-design-labs/node-bigcommerce) api
 
 Example configuration for a single `endpoint`:
 

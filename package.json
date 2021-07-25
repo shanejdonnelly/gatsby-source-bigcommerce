@@ -1,28 +1,30 @@
 {
-    "name": "gatsby-bigcommerce-plugin",
+    "name": "gatsby-source-bigcommerce",
     "version": "0.5.1",
-    "description": "Official Gatsby plugin for BigCommerce API",
+    "description": "This official source plugin makes BigCommerce API data available in GatsbyJS sites. Currently in active development.",
     "scripts": {
         "build": "babel src --out-dir .",
         "prepublishOnly": "npm run build",
         "test": "echo \"Error: no test specified\" && exit 1",
         "prepare": "husky install"
     },
-    "homepage": "https://github.com/epic-design-labs/gatsby-bigcommerce-plugin/blob/master/README.md",
+    "homepage": "https://github.com/epic-design-labs/gatsby-source-bigcommerce/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/epic-design-labs/gatsby-bigcommerce-plugin"
+        "url": "https://github.com/epic-design-labs/gatsby-source-bigcommerce"
     },
     "keywords": [
         "gatsby",
         "gatsby-plugin",
-        "gatsby-bigcommerce-plugin",
+        "gatsby-source-bigcommerce",
         "plugin",
         "source",
         "big",
         "commerce",
         "bigcommerce",
-        "api"
+        "api",
+        "headless",
+        "gatsby-source"
     ],
     "author": "Epic Design Labs <guy@epicdesignlabs.com> (https://epicdesignlabs.com)",
     "contributors": [
