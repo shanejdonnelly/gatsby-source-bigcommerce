@@ -1,5 +1,5 @@
 {
-    "name": "gatsby-source-bigcommerce",
+    "name": "@epic-design-labs/gatsby-source-bigcommerce",
     "version": "0.5.1",
     "description": "This official source plugin makes BigCommerce API data available in GatsbyJS sites. Currently in active development.",
     "scripts": {
@@ -11,7 +11,7 @@
     "homepage": "https://github.com/epic-design-labs/gatsby-source-bigcommerce/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/epic-design-labs/gatsby-source-bigcommerce"
+        "url": "git+https://github.com/epic-design-labs/gatsby-source-bigcommerce.git"
     },
     "keywords": [
         "gatsby",
@@ -26,16 +26,11 @@
         "headless",
         "gatsby-source"
     ],
-    "author": "Epic Design Labs <guy@epicdesignlabs.com> (https://epicdesignlabs.com)",
+    "author": "Epic Design Labs (https://epicdesignlabs.com)",
     "contributors": [
-        {
-            "name": "Guy Romelle Magayano",
-            "email": "guy@epicdesignlabs.com"
-        },
-        {
-            "name": "Grant Glidewell",
-            "email": "grant@thirdandgrove.com"
-        }
+        "Guy Romelle Magayano <guy@epicdesignlabs.com>",
+        "Grant Glidewell",
+        "Eric Boggs"
     ],
     "license": "MIT",
     "dependencies": {
@@ -82,5 +77,9 @@
             "prettier --write",
             "git add"
         ]
-    }
+    },
+    "bugs": {
+        "url": "https://github.com/epic-design-labs/gatsby-source-bigcommerce/issues"
+    },
+    "main": "index.js"
 }
