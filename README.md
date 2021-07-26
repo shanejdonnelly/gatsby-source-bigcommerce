@@ -7,13 +7,13 @@ This source plugin makes BigCommerce API data available in GatsbyJS sites. Curre
 For Yarn:
 
 ```
-yarn add gatsby-source-bigcommerce
+yarn add @epicdesignlabs/gatsby-source-bigcommerce
 ```
 
 For NPM:
 
 ```
-npm install gatsby-source-bigcommerce
+npm install @epicdesignlabs/gatsby-source-bigcommerce
 ```
 
 in `gatsby-config.js`
@@ -49,7 +49,7 @@ options: {
   // OPTIONAL
   logLevel: 'info',
   nodeName: 'BigCommerceNode',
-  apiVersion: 'v2'
+  apiVersion: 'v2' // for new storefronts on BigCommerce use 'v3'
 }
 ```
 
@@ -63,6 +63,7 @@ options: {
   endpoints: {
     BigCommerceProducts: "/catalog/products",
     BigCommerceCategories: "/catalog/categories",
+    BigCommerceBrands: "/catalog/brands"
   }
 }
 ```
