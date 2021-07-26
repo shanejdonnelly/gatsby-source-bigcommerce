@@ -1,85 +1,85 @@
 {
-    "name": "@epic-design-labs/gatsby-source-bigcommerce",
-    "version": "0.5.1",
-    "description": "This official source plugin makes BigCommerce API data available in GatsbyJS sites. Currently in active development.",
-    "scripts": {
-        "build": "babel src --out-dir .",
-        "prepublishOnly": "npm run build",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "prepare": "husky install"
-    },
-    "homepage": "https://github.com/epic-design-labs/gatsby-source-bigcommerce/blob/master/README.md",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/epic-design-labs/gatsby-source-bigcommerce.git"
-    },
-    "keywords": [
-        "gatsby",
-        "gatsby-plugin",
-        "gatsby-source-bigcommerce",
-        "plugin",
-        "source",
-        "big",
-        "commerce",
-        "bigcommerce",
-        "api",
-        "headless",
-        "gatsby-source"
+  "name": "@epicdesignlabs/gatsby-source-bigcommerce",
+  "version": "0.5.1",
+  "description": "This official source plugin makes BigCommerce API data available in GatsbyJS sites. Currently in active development.",
+  "scripts": {
+    "build": "babel src --out-dir .",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "homepage": "https://github.com/epic-design-labs/gatsby-source-bigcommerce/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epic-design-labs/gatsby-source-bigcommerce.git"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-source-bigcommerce",
+    "plugin",
+    "source",
+    "big",
+    "commerce",
+    "bigcommerce",
+    "api",
+    "headless",
+    "gatsby-source"
+  ],
+  "author": "Epic Design Labs (https://epicdesignlabs.com)",
+  "contributors": [
+    "Guy Romelle Magayano <guy@epicdesignlabs.com>",
+    "Grant Glidewell",
+    "Eric Boggs"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-gatsby-package": "^1.10.0",
+    "http-proxy-middleware": "^2.0.1",
+    "logger": "^0.0.1",
+    "micro": "^9.3.4",
+    "node-fetch": "^2.6.1"
+  },
+  "peerDependencies": {
+    "gatsby": "^3.10.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "dotenv-cli": "^4.0.0",
+    "eslint": "^7.31.0",
+    "eslint-plugin-react": "^7.24.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.1",
+    "prettier": "^2.3.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "prettier --write",
+      "git add"
     ],
-    "author": "Epic Design Labs (https://epicdesignlabs.com)",
-    "contributors": [
-        "Guy Romelle Magayano <guy@epicdesignlabs.com>",
-        "Grant Glidewell",
-        "Eric Boggs"
-    ],
-    "license": "MIT",
-    "dependencies": {
-        "babel-preset-gatsby-package": "^1.10.0",
-        "http-proxy-middleware": "^2.0.1",
-        "logger": "^0.0.1",
-        "micro": "^9.3.4",
-        "node-fetch": "^2.6.1"
-    },
-    "peerDependencies": {
-        "gatsby": "^3.10.1"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.14.8",
-        "@babel/core": "^7.14.8",
-        "commitizen": "^4.2.4",
-        "cross-env": "^7.0.3",
-        "cz-conventional-changelog": "^3.3.0",
-        "dotenv-cli": "^4.0.0",
-        "eslint": "^7.31.0",
-        "eslint-plugin-react": "^7.24.0",
-        "husky": "^7.0.1",
-        "lint-staged": "^11.1.1",
-        "prettier": "^2.3.2"
-    },
-    "config": {
-        "commitizen": {
-            "path": "cz-conventional-changelog"
-        }
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged",
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-        }
-    },
-    "lint-staged": {
-        "**/*.{js,jsx}": [
-            "prettier --write",
-            "git add"
-        ],
-        "**/*.{md,mdx,json}": [
-            "prettier --write",
-            "git add"
-        ]
-    },
-    "bugs": {
-        "url": "https://github.com/epic-design-labs/gatsby-source-bigcommerce/issues"
-    },
-    "main": "index.js"
+    "**/*.{md,mdx,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/epic-design-labs/gatsby-source-bigcommerce/issues"
+  },
+  "main": "index.js"
 }
